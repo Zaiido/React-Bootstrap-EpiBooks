@@ -12,7 +12,7 @@ class AllTheBooks extends Component {
                             <Card>
                                 <Card.Img variant="top" src={book.img} />
                                 <Card.Body>
-                                    <Badge className="badge badge-pill badge-primary">
+                                    <Badge pill variant="primary">
                                         {book.category}
                                     </Badge>
                                     <Card.Title className="truncate">{book.title}</Card.Title>
