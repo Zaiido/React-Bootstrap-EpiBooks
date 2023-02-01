@@ -42,3 +42,11 @@ p.lead,
   left: 2%;
   padding: 10px !important;
 }
+
+input {
+  width: 400px !important;
+}
+
+.selected {
+  border: 1px solid red !important;
+}
