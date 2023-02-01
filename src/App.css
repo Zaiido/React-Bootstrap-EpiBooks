@@ -30,10 +30,19 @@ p.lead,
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 .card {
   position: relative;
+}
+
+.card img {
+  pointer-events: none;
+}
+
+.card-text {
+  pointer-events: none;
 }
 
 .badge {

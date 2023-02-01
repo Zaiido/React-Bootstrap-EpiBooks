@@ -13,13 +13,12 @@ class SingleBook extends Component {
                 <Card onClick={(eventData) => {
                     if (this.state.selected === false) {
                         this.setState({ selected: true })
-                        eventData.target.parentElement.classList.add("selected")
+                        eventData.target.classList.add("selected")
                     } else {
                         this.setState({ selected: false })
-                        eventData.target.parentElement.classList.remove("selected")
+                        eventData.target.classList.remove("selected")
 
                     }
-                    // eventData.target.className = ""
                 }}>
                     <Card.Img variant="top" src={this.props.book.img} />
                     <Card.Body>
