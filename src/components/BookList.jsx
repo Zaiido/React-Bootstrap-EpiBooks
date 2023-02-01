@@ -23,7 +23,7 @@ class BookList extends Component {
                 </div>
                 <Row className="my-4">
                     {this.props.listOfBooks.filter((book) => {
-                        return book.title.toLowerCase().includes(this.state.query)
+                        return book.title.toLowerCase().includes(this.state.query.toLowerCase())
                     }).map((book) => {
                         return <SingleBook book={book} key={book.asin} />
                     })}
