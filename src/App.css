@@ -37,11 +37,9 @@ p.lead,
   position: relative;
 }
 
+.card-text,
+.card-body,
 .card img {
-  pointer-events: none;
-}
-
-.card-text {
   pointer-events: none;
 }
 
