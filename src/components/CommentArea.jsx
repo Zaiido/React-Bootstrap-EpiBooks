@@ -22,8 +22,8 @@ class CommentArea extends Component {
                 }
             })
             if (response.ok) {
-                let data = await response.json();
-                this.setState({ bookComments: data, isLoading: false })
+                let comments = await response.json();
+                this.setState({ bookComments: comments, isLoading: false })
             } else {
                 this.setState({ isError: true, isLoading: false })
 
