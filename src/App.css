@@ -57,3 +57,46 @@ input {
 .selected {
   border: 1px solid red !important;
 }
+
+.comment-area {
+  position: absolute;
+  top: 0;
+  left: 15%;
+  z-index: 2;
+  background-color: white;
+  box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  width: 400px;
+  font-size: 13px;
+  padding: 10px;
+}
+
+.comment-area p {
+  line-height: 0.5;
+}
+
+.comment-area span,
+.comment-area label {
+  font-weight: bold;
+}
+
+.comment-area form {
+  border: 1px solid rgba(0, 0, 0, .125);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.25rem;
+  margin-top: 5px;
+}
+
+.comment-area input {
+  width: 100% !important;
+  font-size: inherit;
+}
+
+.comment-area button {
+  font-size: inherit;
+}
+
+.spinner {
+  margin-left: 45%;
+  margin-top: 2%;
+}
