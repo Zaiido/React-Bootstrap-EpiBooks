@@ -14,9 +14,16 @@ class CommentArea extends Component {
         this.getComments()
     }
 
+
+    componentDidUpdate(prevProps, prevStat) {
+        if (prevProps.bookId !== this.props.bookId) {
+            this.getComments();
+        }
+    }
+
     getComments = async () => {
         try {
-            let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.bookID, {
+            let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.bookId, {
                 headers: {
                     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RiYWMxNTUwMWZlODAwMTU2MGMyMTIiLCJpYXQiOjE2NzUzNDA4MjIsImV4cCI6MTY3NjU1MDQyMn0.dNhuX-b-VsYhfD6A0twErLiNz3kOKX37djHyFrKqtP0"
                 }
@@ -42,7 +49,7 @@ class CommentArea extends Component {
                 <ListGroup>
                     <CommentsList bookCommentsList={this.state.bookComments} />
                 </ListGroup>
-                <AddComment elementId={this.props.bookID} />
+                <AddComment elementId={this.props.bookId} />
             </div>
 
 

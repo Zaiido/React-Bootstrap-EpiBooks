@@ -5,7 +5,20 @@ import SingleBook from "./SingleBook";
 class BookList extends Component {
 
     state = {
-        query: ""
+        query: "",
+        bookId: undefined
+    }
+
+    getBookIdFromSingleBook = (id) => {
+        this.setState({ bookId: id })
+    }
+
+    componentDidUpdate(prevProps, prevStat) {
+        // console.log(prevStat.bookId)
+        // console.log(this.state.bookId)
+        if (prevStat.bookId !== this.state.bookId) {
+            this.props.sendBookId(this.state.bookId)
+        }
     }
 
     render() {
@@ -25,7 +38,7 @@ class BookList extends Component {
                     {this.props.listOfBooks.filter((book) => {
                         return book.title.toLowerCase().includes(this.state.query.toLowerCase())
                     }).map((book) => {
-                        return <SingleBook book={book} key={book.asin} />
+                        return <SingleBook sendBookId={this.getBookIdFromSingleBook} book={book} key={book.asin} />
                     })}
 
                 </Row>
