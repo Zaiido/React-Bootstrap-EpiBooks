@@ -14,8 +14,6 @@ class BookList extends Component {
     }
 
     componentDidUpdate(prevProps, prevStat) {
-        // console.log(prevStat.bookId)
-        // console.log(this.state.bookId)
         if (prevStat.bookId !== this.state.bookId) {
             this.props.sendBookId(this.state.bookId)
         }
@@ -37,7 +35,7 @@ class BookList extends Component {
                 <Row className="my-4">
                     {this.props.listOfBooks.filter((book) => {
                         return book.title.toLowerCase().includes(this.state.query.toLowerCase())
-                    }).map((book) => {
+                    }).slice(0, 14).map((book) => {
                         return <SingleBook sendBookId={this.getBookIdFromSingleBook} book={book} key={book.asin} />
                     })}
 

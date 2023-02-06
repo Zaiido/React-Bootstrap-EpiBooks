@@ -31,10 +31,10 @@ class App extends Component {
         {/* <AllTheBooks /> */}
         <Container>
           <Row>
-            <Col className='col-12 col-sm-12 col-md-6 col-lg-6'>
+            <Col className='col-12 col-sm-6 col-md-6 col-lg-6'>
               <BookList listOfBooks={history} sendBookId={this.getBookIdFromBookList} />
             </Col>
-            <Col className='col-12 col-sm-12 col-md-6 col-lg-6 comment-area-container'>
+            <Col className='col-12 col-sm-6 col-md-6 col-lg-6 comment-area-container'>
               <CommentArea bookId={this.state.bookId} />
             </Col>
           </Row>
