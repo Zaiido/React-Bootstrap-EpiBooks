@@ -25,6 +25,7 @@ class AddComment extends Component {
                         }
                     })
                     if (response.ok) {
+                        this.props.commentAdded()
                         this.setState({
                             ...this.state,
                             isError: false
@@ -66,7 +67,7 @@ class AddComment extends Component {
                         })
                     }} />
                 </Form.Group>
-                {this.state.isError === false && <Alert variant="success"> Comment added. Please reload the page. 😁</Alert>}
+                {this.state.isError === false && <Alert variant="success"> Comment added.😁</Alert>}
                 {this.state.isError && <Alert variant="danger"> Aww snap! There is an error...😐 Please try again later.</Alert>}
                 <Button variant="primary" type="submit">
                     Submit

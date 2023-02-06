@@ -26,6 +26,7 @@ class SingleComment extends Component {
                                     })
                                     if (response.ok) {
                                         this.setState({ isError: false })
+                                        this.props.commentDeleted()
                                     } else {
                                         this.setState({ isError: true })
                                     }
@@ -35,7 +36,6 @@ class SingleComment extends Component {
                             }}>Delete</Button>
                     </div>
                 </div>
-                {this.state.isError === false && <Alert variant="success"> Comment deleted. Please reload the page. 😁</Alert>}
                 {this.state.isError && <Alert variant="danger"> Aww snap! There is an error...😐 Please try again later.</Alert>}
             </ListGroup.Item>
         )

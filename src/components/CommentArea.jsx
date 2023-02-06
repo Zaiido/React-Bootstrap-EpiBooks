@@ -7,7 +7,22 @@ class CommentArea extends Component {
     state = {
         bookComments: [],
         isLoading: true,
-        isError: false
+        isError: false,
+        addedComment: false,
+        deletedComment: false
+
+    }
+
+    commentDidAdd = () => {
+        this.setState({
+            addedComment: true
+        })
+    }
+
+    commentDidDelete = () => {
+        this.setState({
+            deletedComment: true
+        })
     }
 
     componentDidMount() {
@@ -16,8 +31,12 @@ class CommentArea extends Component {
 
 
     componentDidUpdate(prevProps, prevStat) {
-        if (prevProps.bookId !== this.props.bookId) {
+        if (prevProps.bookId !== this.props.bookId || prevStat.addedComment !== this.state.addedComment || prevStat.deletedComment !== this.state.deletedComment) {
             this.getComments();
+            this.setState({
+                addedComment: false,
+                deletedComment: false
+            })
         }
     }
 
@@ -47,9 +66,9 @@ class CommentArea extends Component {
                 {this.state.isError && <Alert variant="danger"> Aww snap! There is an error...😐 Please try again later.</Alert>}
 
                 <ListGroup>
-                    <CommentsList bookCommentsList={this.state.bookComments} />
+                    <CommentsList bookCommentsList={this.state.bookComments} commentDeleted={this.commentDidDelete} />
                 </ListGroup>
-                <AddComment elementId={this.props.bookId} />
+                <AddComment elementId={this.props.bookId} commentAdded={this.commentDidAdd} />
             </div>
 
 
