@@ -36,7 +36,7 @@ class BookList extends Component {
                     {this.props.listOfBooks.filter((book) => {
                         return book.title.toLowerCase().includes(this.state.query.toLowerCase())
                     }).slice(0, 14).map((book) => {
-                        return <SingleBook sendBookId={this.getBookIdFromSingleBook} book={book} key={book.asin} />
+                        return <SingleBook sendBookId={this.getBookIdFromSingleBook} book={book} key={book.asin} selected={book.asin === this.state.bookId} />
                     })}
 
                 </Row>

@@ -35,7 +35,7 @@ class App extends Component {
               <BookList listOfBooks={history} sendBookId={this.getBookIdFromBookList} />
             </Col>
             <Col className='col-12 col-sm-6 col-md-6 col-lg-6 comment-area-container'>
-              <CommentArea bookId={this.state.bookId} />
+              {this.state.bookId ? <CommentArea bookId={this.state.bookId} /> : <h4>Comments Area</h4>}
             </Col>
           </Row>
         </Container>

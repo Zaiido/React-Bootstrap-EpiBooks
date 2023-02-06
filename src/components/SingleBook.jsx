@@ -4,25 +4,15 @@ import { Col, Card, Badge } from "react-bootstrap"
 class SingleBook extends Component {
 
     state = {
-        selected: false
+        selectedBook: null
     }
 
     render() {
         return (
             <>
                 <Col xs={12} md={6} lg={6} className="my-3">
-                    <Card onClick={(eventData) => {
-                        if (this.state.selected === false) {
-                            this.setState({ selected: true })
-                            eventData.target.classList.add("selected")
-
-                            this.props.sendBookId(this.props.book.asin)
-
-                        } else {
-                            this.setState({ selected: false })
-                            eventData.target.classList.remove("selected")
-
-                        }
+                    <Card className={this.props.selected ? "selected" : " "} onClick={() => {
+                        this.props.sendBookId(this.props.book.asin)
                     }}>
                         <Card.Img variant="top" src={this.props.book.img} />
                         <Card.Body>
@@ -35,7 +25,6 @@ class SingleBook extends Component {
                             </Card.Text>
                         </Card.Body>
                     </Card>
-                    {/* {this.state.selected && <CommentArea bookID={this.props.book.asin} />} */}
                 </Col>
             </>
         )
