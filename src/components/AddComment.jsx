@@ -62,7 +62,7 @@ const AddComment = (props) => {
             </Form.Group>
             {isError && <Alert variant="danger"> Aww snap! There is an error...😐</Alert>}
             <Button variant="primary" type="submit">
-                Submit
+                Add Comment
             </Button>
         </Form>
     )
