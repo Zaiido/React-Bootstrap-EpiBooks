@@ -1,35 +1,32 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import SingleComment from "./SingleComment";
 
-class CommentsList extends Component {
-    state = {
-        deletedComment: false
+const CommentsList = (props) => {
+
+    const [deletedComment, setDeletedComment] = useState(false)
+
+    const commentDidDelete = () => {
+        setDeletedComment(true)
     }
 
-    commentDidDelete = () => {
-        this.setState({ deletedComment: true })
-    }
+    useEffect(() => {
+        props.commentDeleted();
+        setDeletedComment(false);
 
-    componentDidUpdate(prevProps, prevStat) {
-        if (prevStat.deletedComment !== this.state.deletedComment) {
-            this.props.commentDeleted()
-            this.setState({ deletedComment: false })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [deletedComment])
 
-        }
 
-    }
-
-    render() {
-        return (
-            <>
-                {this.props.bookCommentsList.map((commentObject) => {
-                    return (
-                        <SingleComment commentObject={commentObject} key={commentObject._id} commentDeleted={this.commentDidDelete} />
-                    )
-                })}
-            </>
-        )
-    }
+    return (
+        <>
+            {props.bookCommentsList.map((commentObject) => {
+                return (
+                    <SingleComment commentObject={commentObject} key={commentObject._id} commentDeleted={commentDidDelete} />
+                )
+            })}
+        </>
+    )
 }
+
 
 export default CommentsList

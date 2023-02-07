@@ -1,79 +1,65 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import CommentsList from "./CommentsList";
 import { ListGroup, Spinner, Alert } from "react-bootstrap";
 import AddComment from "./AddComment";
 
-class CommentArea extends Component {
-    state = {
-        bookComments: [],
-        isLoading: true,
-        isError: false,
-        addedComment: false,
-        deletedComment: false
+const CommentArea = (props) => {
+    const [bookComments, setBookComments] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [isError, setIsError] = useState(false)
+    const [addedOrDeletedComment, setAddedOrDeletedComment] = useState(false)
 
+    const commentDidAddOrDelete = () => {
+        setAddedOrDeletedComment(true)
     }
 
-    commentDidAdd = () => {
-        this.setState({
-            addedComment: true
-        })
-    }
+    useEffect(() => {
+        getComments();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    commentDidDelete = () => {
-        this.setState({
-            deletedComment: true
-        })
-    }
-
-    componentDidMount() {
-        this.getComments()
-    }
+    useEffect(() => {
+        getComments();
+        setAddedOrDeletedComment(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.bookId, addedOrDeletedComment])
 
 
-    componentDidUpdate(prevProps, prevStat) {
-        if (prevProps.bookId !== this.props.bookId || prevStat.addedComment !== this.state.addedComment || prevStat.deletedComment !== this.state.deletedComment) {
-            this.getComments();
-            this.setState({
-                addedComment: false,
-                deletedComment: false
-            })
-        }
-    }
-
-    getComments = async () => {
+    const getComments = async () => {
         try {
-            let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.bookId, {
+            let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + props.bookId, {
                 headers: {
                     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RiYWMxNTUwMWZlODAwMTU2MGMyMTIiLCJpYXQiOjE2NzUzNDA4MjIsImV4cCI6MTY3NjU1MDQyMn0.dNhuX-b-VsYhfD6A0twErLiNz3kOKX37djHyFrKqtP0"
                 }
             })
             if (response.ok) {
                 let comments = await response.json();
-                this.setState({ bookComments: comments, isLoading: false })
+                setBookComments(comments);
+                setIsLoading(false)
             } else {
-                this.setState({ isError: true, isLoading: false })
-
+                setIsError(true)
+                setIsLoading(false)
             }
         } catch (error) {
-            this.setState({ isError: true, isLoading: false })
+            setIsError(true)
+            setIsLoading(false)
         }
     }
 
-    render() {
-        return (
-            <div className="comment-area">
-                {this.state.isLoading && <Spinner className="spinner" animation="border" variant="primary" />}
-                {this.state.isError && <Alert variant="danger"> Aww snap! There is an error...😐 Please try again later.</Alert>}
+    return (
+        <div className="comment-area">
+            {isLoading && <Spinner className="spinner" animation="border" variant="primary" />}
+            {isError && <Alert variant="danger"> Aww snap! There is an error...😐 Please try again later.</Alert>}
 
-                <ListGroup>
-                    <CommentsList bookCommentsList={this.state.bookComments} commentDeleted={this.commentDidDelete} />
-                </ListGroup>
-                <AddComment elementId={this.props.bookId} commentAdded={this.commentDidAdd} />
-            </div>
+            <ListGroup>
+                <CommentsList bookCommentsList={bookComments} commentDeleted={commentDidAddOrDelete} />
+            </ListGroup>
+            <AddComment elementId={props.bookId} commentAdded={commentDidAddOrDelete} />
+        </div>
 
 
-        )
-    }
+    )
 }
+
 
 export default CommentArea

@@ -8,41 +8,35 @@ import BookList from './components/BookList';
 import history from './books/history.json'
 import { Col, Container, Row } from 'react-bootstrap';
 import CommentArea from './components/CommentArea';
+import React, { useState } from 'react'
 
+const App = () => {
 
-import React, { Component } from 'react'
+  const [bookId, setBookId] = useState(null)
 
-class App extends Component {
-
-  state = {
-    bookId: null
-  }
-
-  getBookIdFromBookList = (id) => {
-    this.setState({ bookId: id })
+  const getBookIdFromBookList = (id) => {
+    setBookId(id)
   }
 
 
-  render() {
-    return (
-      <>
-        <MyNav />
-        <Welcome />
-        {/* <AllTheBooks /> */}
-        <Container>
-          <Row>
-            <Col className='col-12 col-sm-6 col-md-6 col-lg-6'>
-              <BookList listOfBooks={history} sendBookId={this.getBookIdFromBookList} />
-            </Col>
-            <Col className='col-12 col-sm-6 col-md-6 col-lg-6 comment-area-container'>
-              {this.state.bookId ? <CommentArea bookId={this.state.bookId} /> : <h4>Comments Area</h4>}
-            </Col>
-          </Row>
-        </Container>
-        <MyFooter />
-      </>
-    )
-  }
+  return (
+    <>
+      <MyNav />
+      <Welcome />
+      {/* <AllTheBooks /> */}
+      <Container>
+        <Row>
+          <Col className='col-12 col-sm-6 col-md-6 col-lg-6'>
+            <BookList listOfBooks={history} sendBookId={getBookIdFromBookList} />
+          </Col>
+          <Col className='col-12 col-sm-6 col-md-6 col-lg-6 comment-area-container'>
+            {bookId ? <CommentArea bookId={bookId} /> : <h4>Comments Area</h4>}
+          </Col>
+        </Row>
+      </Container>
+      <MyFooter />
+    </>
+  )
 }
 
 export default App;

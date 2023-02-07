@@ -1,47 +1,43 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Form, FormControl } from "react-bootstrap";
 import SingleBook from "./SingleBook";
 
-class BookList extends Component {
+const BookList = (props) => {
 
-    state = {
-        query: "",
-        bookId: undefined
+    const [query, setQuery] = useState("");
+    const [bookId, setBookId] = useState(undefined)
+
+    const getBookIdFromSingleBook = (id) => {
+        setBookId(id)
     }
 
-    getBookIdFromSingleBook = (id) => {
-        this.setState({ bookId: id })
-    }
 
-    componentDidUpdate(prevProps, prevStat) {
-        if (prevStat.bookId !== this.state.bookId) {
-            this.props.sendBookId(this.state.bookId)
-        }
-    }
+    useEffect(() => {
+        props.sendBookId(bookId)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [bookId])
 
-    render() {
-        return (
-            <Container>
-                <div className="d-flex justify-content-end">
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" value={this.state.query}
-                            onChange={(eventData) => {
-                                this.setState({
-                                    query: eventData.target.value
-                                })
-                            }} />
-                    </Form>
-                </div>
-                <Row className="my-4">
-                    {this.props.listOfBooks.filter((book) => {
-                        return book.title.toLowerCase().includes(this.state.query.toLowerCase())
-                    }).slice(0, 14).map((book) => {
-                        return <SingleBook sendBookId={this.getBookIdFromSingleBook} book={book} key={book.asin} selected={book.asin === this.state.bookId} />
-                    })}
 
-                </Row>
-            </Container>
-        )
-    }
+    return (
+        <Container>
+            <div className="d-flex justify-content-end">
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" value={query}
+                        onChange={(eventData) => {
+                            setQuery(eventData.target.value)
+                        }} />
+                </Form>
+            </div>
+            <Row className="my-4">
+                {props.listOfBooks.filter((book) => {
+                    return book.title.toLowerCase().includes(query.toLowerCase())
+                }).slice(0, 14).map((book) => {
+                    return <SingleBook sendBookId={getBookIdFromSingleBook} book={book} key={book.asin} selected={book.asin === bookId} />
+                })}
+
+            </Row>
+        </Container>
+    )
 }
+
 export default BookList
