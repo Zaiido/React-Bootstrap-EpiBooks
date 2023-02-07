@@ -15,11 +15,6 @@ const CommentArea = (props) => {
 
     useEffect(() => {
         getComments();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        getComments();
         setAddedOrDeletedComment(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.bookId, addedOrDeletedComment])
