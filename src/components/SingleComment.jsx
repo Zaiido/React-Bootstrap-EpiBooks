@@ -7,14 +7,14 @@ const SingleComment = (props) => {
 
     return (
         <ListGroup.Item>
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center flex-wrap">
                 <div>
                     <p><span>Comment:</span> {props.commentObject.comment}</p>
                     <p><span>Rating:</span> {props.commentObject.rate}</p>
                     <p><span>Author:</span> {props.commentObject.author}</p>
                 </div>
-                <div className="ml-auto">
-                    <Button variant="danger"
+                <div className="ml-lg-auto">
+                    <Button variant="danger" className="m-3"
                         onClick={async () => {
                             try {
                                 let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + props.commentObject._id, {

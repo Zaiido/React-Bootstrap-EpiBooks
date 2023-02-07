@@ -4,7 +4,7 @@ const SingleBook = (props) => {
 
     return (
         <>
-            <Col xs={12} md={6} lg={6} className="my-3">
+            <Col xs={12} md={6} lg={6} className="my-3 d-flex justify-content-center">
                 <Card className={props.selected ? "selected" : " "} onClick={() => {
                     props.sendBookId(props.book.asin)
                 }}>

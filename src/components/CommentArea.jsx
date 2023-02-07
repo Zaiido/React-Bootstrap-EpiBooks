@@ -45,7 +45,6 @@ const CommentArea = (props) => {
         <div className="comment-area">
             {isLoading && <Spinner className="spinner" animation="border" variant="primary" />}
             {isError && <Alert variant="danger"> Aww snap! There is an error...😐 Please try again later.</Alert>}
-
             <ListGroup>
                 <CommentsList bookCommentsList={bookComments} commentDeleted={commentDidAddOrDelete} />
             </ListGroup>
@@ -55,6 +54,4 @@ const CommentArea = (props) => {
 
     )
 }
-
-
 export default CommentArea

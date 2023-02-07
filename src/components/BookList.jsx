@@ -20,7 +20,7 @@ const BookList = (props) => {
 
     return (
         <Container>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-center justify-content-md-end">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" value={query}
                         onChange={(eventData) => {

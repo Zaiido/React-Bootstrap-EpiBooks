@@ -26,10 +26,10 @@ const App = () => {
       {/* <AllTheBooks /> */}
       <Container>
         <Row>
-          <Col className='col-12 col-sm-6 col-md-6 col-lg-6'>
+          <Col className='col-12 col-sm-6 col-md-6 col-lg-6 order-2 order-sm-1'>
             <BookList listOfBooks={history} sendBookId={getBookIdFromBookList} />
           </Col>
-          <Col className='col-12 col-sm-6 col-md-6 col-lg-6 comment-area-container'>
+          <Col className='col-12 col-sm-6 col-md-6 col-lg-6 order-1 order-sm-2 comment-area-container'>
             {bookId ? <CommentArea bookId={bookId} /> : <h4>Comments Area</h4>}
           </Col>
         </Row>

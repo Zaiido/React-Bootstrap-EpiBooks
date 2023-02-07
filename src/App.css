@@ -35,6 +35,7 @@ p.lead,
 
 .card {
   position: relative;
+  max-width: 300px;
 }
 
 .card-text,
@@ -54,6 +55,13 @@ p.lead,
   outline: 1px solid red !important;
 }
 
+.comment-area-container {
+  display: flex;
+  justify-content: center;
+  position: sticky !important;
+  top: -20px;
+}
+
 .comment-area-container h4 {
   margin-top: 70px;
 }
@@ -62,11 +70,14 @@ p.lead,
   margin-top: 68px;
   background-color: white;
   border-radius: 5px;
-  width: 400px;
+  max-width: 400px;
   font-size: 13px;
   padding: 10px;
   position: sticky;
   top: 50px;
+  max-height: 90vh;
+  overflow-y: auto;
+
 }
 
 .comment-area p {
