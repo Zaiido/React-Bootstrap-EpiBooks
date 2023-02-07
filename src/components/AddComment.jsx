@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
 const AddComment = (props) => {
@@ -10,6 +10,14 @@ const AddComment = (props) => {
     })
 
     const [isError, setIsError] = useState(false)
+
+    useEffect(() => {
+        setCommentToAdd({
+            comment: "",
+            rate: "",
+            elementId: props.elementId
+        })
+    }, [props.elementId])
 
     return (
         <Form onSubmit={async (eventData) => {
